@@ -1,5 +1,6 @@
 use std::collections::BTreeMap;
 use std::fmt::Write;
+use std::time::{Duration, Instant};
 
 use rs_simple_logging::{
     copy::{
@@ -8,7 +9,7 @@ use rs_simple_logging::{
     },
     proxy::copy::{proxy_new_from_resource_proxy, resource_proxy_new_from_map},
     serialize::{serializer_new_from_fn, Serialize},
-    write::{level_checker_from_lower_bound, log_writer_new_from_fn, LogWrite},
+    write::{level_checker_from_lower_bound, limited_writer_new, log_writer_new_from_fn, LogWrite},
     Item, Severity,
 };
 
@@ -31,8 +32,25 @@ fn ltsv_serializer() -> impl Serialize {
     })
 }
 
+fn rate_limiter(min_duration: Duration) -> impl FnMut(Severity) -> bool {
+    let mut state = BTreeMap::new();
+    move |level: Severity| {
+        let prev: Option<Instant> = state.get(&level).copied();
+        let duration: Option<Duration> =
+            prev.map(|i: Instant| Instant::now().saturating_duration_since(i));
+        let available: bool = duration.map(|d: Duration| min_duration < d).unwrap_or(true);
+        match available {
+            true => {
+                state.insert(level, Instant::now());
+            }
+            false => {}
+        }
+        available
+    }
+}
+
 fn ltsv_writer() -> impl LogWrite {
-    log_writer_new_from_fn(
+    let writer = log_writer_new_from_fn(
         |serialized: &str, level: Severity| match level {
             Severity::Trace => println!("{serialized}"),
             Severity::Debug => println!("{serialized}"),
@@ -42,7 +60,8 @@ fn ltsv_writer() -> impl LogWrite {
             Severity::Fatal => eprintln!("{serialized}"),
         },
         level_checker_from_lower_bound(Severity::Info),
-    )
+    );
+    limited_writer_new(writer, rate_limiter(Duration::from_millis(1)))
 }
 
 fn init_log() {
@@ -92,9 +111,22 @@ fn main() {
     init_log();
 
     trace("Trying to parse request...");
+    trace("Trying to parse request...");
+
     debug("Parameters: id=");
+    debug("Parameters: id=");
+
     info("Path: /users");
+    info("Path: /users");
+
     warn("Invalid request: id missing.");
+    warn("Invalid request: id missing.");
+
     error("Client gone.");
+    error("Client gone.");
+
+    fatal("UNABLE TO SAVE LOG");
+    fatal("UNABLE TO SAVE LOG");
+    std::thread::sleep(Duration::from_millis(10));
     fatal("UNABLE TO SAVE LOG");
 }

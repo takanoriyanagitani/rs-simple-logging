@@ -1,5 +1,6 @@
 #![forbid(unsafe_code)]
 
+use std::cmp::Ordering;
 use std::collections::BTreeMap;
 use std::time::SystemTime;
 
@@ -8,7 +9,7 @@ pub mod proxy;
 pub mod serialize;
 pub mod write;
 
-#[derive(Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 pub enum Severity {
     Trace,
     Debug,
@@ -16,6 +17,20 @@ pub enum Severity {
     Warn,
     Error,
     Fatal,
+}
+
+impl PartialOrd for Severity {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Severity {
+    fn cmp(&self, other: &Self) -> Ordering {
+        let su: u8 = (*self).into();
+        let ou: u8 = (*other).into();
+        su.cmp(&ou)
+    }
 }
 
 impl From<u8> for Severity {
