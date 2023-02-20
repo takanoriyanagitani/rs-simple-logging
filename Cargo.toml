@@ -1,8 +1,10 @@
 [package]
 name = "rs-simple-logging"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+description = "Simple logging"
+license = "Apache-2.0"
+documentation = "https://docs.rs/crate/rs-simple-logging"
+repository = "https://github.com/takanoriyanagitani/rs-simple-logging"
 
 [dependencies]
