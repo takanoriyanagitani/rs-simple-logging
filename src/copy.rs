@@ -4,10 +4,17 @@ use std::time::SystemTime;
 
 use crate::{proxy::copy::Proxy, serialize::Serialize, write::LogWrite, Item, Severity};
 
+/// A logger.
 pub trait Logger: Sync + Send {
+    /// Logs an item.
     fn log(&self, item: Item);
 }
 
+/// Creates a logger which converts a log item before logging.
+///
+/// # Arguments
+/// - original: The original logger which will log the converted item.
+/// - proxy: Converts a log item.
 pub fn logger_new_from_proxy<L, P>(original: L, proxy: P) -> impl Logger
 where
     L: Logger,
