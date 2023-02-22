@@ -39,6 +39,7 @@ where
     }
 }
 
+/// Creates a logger from a logger function.
 pub fn logger_new_from_fn<L>(internal: L) -> impl Logger
 where
     L: Fn(Item) + Sync + Send,
