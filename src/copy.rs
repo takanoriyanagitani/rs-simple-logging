@@ -64,6 +64,11 @@ where
     }
 }
 
+/// Creates a logger which writes a serialized log item.
+///
+/// # Arguments
+/// - serialize: Serializes a log item.
+/// - write: Writes a serialized log item.
 pub fn logger_new<S, W>(serialize: S, write: W) -> impl Logger
 where
     S: Serialize,
