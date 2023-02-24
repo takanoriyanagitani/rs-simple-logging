@@ -113,31 +113,37 @@ fn _log(mut item: Item) {
     _LOGGER.log(item)
 }
 
+/// Logs an item as a trace-level event.
 pub fn log_trace(mut item: Item) {
     item.severity = Severity::Trace;
     _log(item)
 }
 
+/// Logs an item as a debugging event.
 pub fn log_debug(mut item: Item) {
     item.severity = Severity::Debug;
     _log(item)
 }
 
+/// Logs an item as an informational event.
 pub fn log_info(mut item: Item) {
     item.severity = Severity::Info;
     _log(item)
 }
 
+/// Logs an item as a warning event.
 pub fn log_warn(mut item: Item) {
     item.severity = Severity::Warn;
     _log(item)
 }
 
+/// Logs an item as an error event.
 pub fn log_error(mut item: Item) {
     item.severity = Severity::Error;
     _log(item)
 }
 
+/// Logs an item as a fatal event.
 pub fn log_fatal(mut item: Item) {
     item.severity = Severity::Fatal;
     _log(item)
