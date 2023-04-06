@@ -149,6 +149,7 @@ pub fn log_fatal(mut item: Item) {
     _log(item)
 }
 
+/// Sets a logger impl.
 pub fn set(neo: &'static dyn Logger) {
     match _LOGGER.try_lock() {
         Err(_) => {}
