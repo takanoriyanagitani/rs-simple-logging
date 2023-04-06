@@ -160,6 +160,7 @@ pub fn set(neo: &'static dyn Logger) {
     }
 }
 
+/// Sets a logger impl(boxed).
 pub fn set_boxed(neo: Box<dyn Logger>) {
     set(Box::leak(neo))
 }
