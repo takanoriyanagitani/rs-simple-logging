@@ -1,3 +1,5 @@
+//! A simple logging api using non-zero copy.
+
 use std::ops::{Deref, DerefMut};
 use std::sync::Mutex;
 use std::time::SystemTime;
