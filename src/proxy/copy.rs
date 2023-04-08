@@ -59,6 +59,7 @@ impl ResourceProxy for ResourceProxyMap {
     }
 }
 
+/// Creates a resource proxy from a map.
 pub fn resource_proxy_new_from_map(internal: BTreeMap<String, String>) -> impl ResourceProxy {
     ResourceProxyMap { internal }
 }
