@@ -64,6 +64,10 @@ pub fn resource_proxy_new_from_map(internal: BTreeMap<String, String>) -> impl R
     ResourceProxyMap { internal }
 }
 
+/// Creates a proxy which tries to get a resource value from a resource proxy.
+///
+/// # Arguments
+/// - resource_proxy: Tries to get a resource value if exists.
 pub fn proxy_new_from_resource_proxy<R>(resource_proxy: R) -> impl Proxy
 where
     R: ResourceProxy,
