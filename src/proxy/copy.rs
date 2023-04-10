@@ -45,7 +45,9 @@ where
     })
 }
 
+/// ResourceProxy can be used to get an alternative value for a key.
 pub trait ResourceProxy {
+    /// Tries to get a value for a name.
     fn get_resource(&self, name: &str) -> Option<&str>;
 }
 
