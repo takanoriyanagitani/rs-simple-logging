@@ -6,14 +6,6 @@ pub trait Proxy {
     fn get_item(&self, original: Item) -> Item;
 }
 
-struct ProxyNop {}
-
-impl Proxy for ProxyNop {
-    fn get_item(&self, original: Item) -> Item {
-        original
-    }
-}
-
 struct ProxyFn<P> {
     internal: P,
 }
