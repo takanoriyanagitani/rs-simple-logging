@@ -2,7 +2,9 @@ use std::collections::BTreeMap;
 
 use crate::Item;
 
+/// Proxy can be used to get a mutated item.
 pub trait Proxy {
+    /// Gets a mutated item.
     fn get_item(&self, original: Item) -> Item;
 }
 
