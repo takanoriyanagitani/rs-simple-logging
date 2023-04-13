@@ -21,6 +21,7 @@ where
     }
 }
 
+/// Creates a proxy which uses a closure to get a mutated item.
 pub fn proxy_new_from_fn<P>(internal: P) -> impl Proxy
 where
     P: Fn(Item) -> Item,
