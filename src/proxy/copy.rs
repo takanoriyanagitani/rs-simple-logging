@@ -29,6 +29,11 @@ where
     ProxyFn { internal }
 }
 
+/// Creates a joined proxy.
+///
+/// # Arguments
+/// - p: Gets a mutated item from the original item.
+/// - q: Gets a mutated item from the item got by `p`.
 pub fn proxy_join<P, Q>(p: P, q: Q) -> impl Proxy
 where
     P: Proxy,
