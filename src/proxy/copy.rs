@@ -1,3 +1,5 @@
+//! Alternative items getter using non-zero copy.
+
 use std::collections::BTreeMap;
 
 use crate::Item;
