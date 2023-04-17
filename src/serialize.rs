@@ -1,5 +1,6 @@
 use crate::Item;
 
+/// Serialize writes a log item into a string.
 pub trait Serialize: Sync + Send {
     fn serialize(&self, item: &Item, buf: &mut String);
 }
