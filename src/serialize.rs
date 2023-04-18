@@ -18,6 +18,7 @@ where
     }
 }
 
+/// Creates a serializer which uses a closure to serialize a log item.
 pub fn serializer_new_from_fn<S>(internal: S) -> impl Serialize
 where
     S: Fn(&Item, &mut String) + Sync + Send,
