@@ -1,3 +1,5 @@
+//! A log item serializer.
+
 use crate::Item;
 
 /// Serialize writes a log item into a string.
