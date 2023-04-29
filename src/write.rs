@@ -3,6 +3,7 @@ use std::sync::Mutex;
 
 use crate::Severity;
 
+/// A log writer which may write a serialized log string.
 pub trait LogWrite: Sync + Send {
     fn write(&self, serialized: &str, level: Severity);
 }
