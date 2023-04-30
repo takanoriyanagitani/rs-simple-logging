@@ -67,6 +67,11 @@ where
     }
 }
 
+/// Creates a log writer which may skip logging.
+///
+/// # Arguments
+/// - internal: An internal log writer which will be used for actual logging.
+/// - check_level: Checks a severity: Returns false to skip logging.
 pub fn log_writer_new_from_fn<W, L>(internal: W, check_level: L) -> impl LogWrite
 where
     W: Fn(&str, Severity) + Sync + Send,
