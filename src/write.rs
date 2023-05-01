@@ -83,6 +83,20 @@ where
     }
 }
 
+/// Creates a log writer which may write logs to stdout/stderr.
+///
+/// # Arguments
+/// - check_level: Checks a severity: Returns false to skip logging.
+///
+/// | Severity | Output |
+/// |:--------:|:------:|
+/// | Trace    | stdout |
+/// | Debug    | stdout |
+/// | Info     | stdout |
+/// | Warn     | stderr |
+/// | Error    | stderr |
+/// | Fatal    | stderr |
+///
 pub fn log_writer_new_std_default_from_fn<L>(check_level: L) -> impl LogWrite
 where
     L: Fn(Severity) -> bool + Sync + Send,
