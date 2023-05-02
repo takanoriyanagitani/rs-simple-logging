@@ -114,6 +114,10 @@ where
     )
 }
 
+/// Creates a severity checker which can be used with a log writer.
+///
+/// # Arguments
+/// - lb_inclusive: A severity level to log(lower bound, inclusive)
 pub fn level_checker_from_lower_bound(
     lb_inclusive: Severity,
 ) -> impl Fn(Severity) -> bool + Send + Sync {
