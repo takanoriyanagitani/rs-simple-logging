@@ -128,6 +128,7 @@ pub fn level_checker_from_lower_bound(
     }
 }
 
+/// Creates a log writer which skips low severity logs.
 pub fn log_writer_new_std_default_from_lower_bound(lb_inclusive: Severity) -> impl LogWrite {
     log_writer_new_std_default_from_fn(level_checker_from_lower_bound(lb_inclusive))
 }
