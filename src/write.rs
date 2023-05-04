@@ -1,3 +1,5 @@
+//! Log Writer generators.
+
 use std::ops::DerefMut;
 use std::sync::Mutex;
 
