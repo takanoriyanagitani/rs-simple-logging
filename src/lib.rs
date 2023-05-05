@@ -73,10 +73,14 @@ impl Severity {
     }
 }
 
+/// A log item.
 pub struct Item {
     pub timestamp: SystemTime,
     pub severity: Severity,
+
+    /// A log message.
     pub body: String,
+
     pub attributes: BTreeMap<String, String>,
     pub resource: BTreeMap<String, String>,
     pub trace_id: Option<String>,
