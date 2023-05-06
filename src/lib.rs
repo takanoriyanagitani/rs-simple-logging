@@ -9,6 +9,7 @@ pub mod proxy;
 pub mod serialize;
 pub mod write;
 
+/// A log level.
 #[derive(PartialEq, Eq, Clone, Copy)]
 pub enum Severity {
     Trace,
